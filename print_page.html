@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printeazy - Print Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+   <style>
+    /* Custom styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        color: #007bff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-primary:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    body.dark-mode {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .dark-mode header {
+        background-color: #343a40;
+    }
+
+    footer {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        left:0;
+        width: 100%;
+        box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.5);
+    }
+
+    header {
+        box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.5);
+    }
+
+    /* Glass effect */
+    .glass-bg {
+        background: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(10px);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+   </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-1">
+        <div class="container">
+            <h1 class="display-4">Printeazy</h1>
+            <p class="lead"><i>"Hassle-free print and stationery services for busy college people"</i></p>
+            <button id="darkModeToggle" class="btn btn-sm btn-outline-light">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <div class="row">
+            <!-- Left Card -->
+            <div class="col-md-8">
+                <div class="card glass-bg">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Get Your Print</h2>
+                        <!-- Print Form -->
+                        <form id="printForm">
+                            <div class="form-group">
+                                <label for="document">Upload Document</label>
+                                <input type="file" class="form-control-file" id="document" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="colorOption">Color Option</label>
+                                <select class="form-control" id="colorOption">
+                                    <option>Monochrome</option>
+                                    <option>Color</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="copies">Number of Copies</label>
+                                <input type="number" class="form-control" id="copies" placeholder="Enter number of copies" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="printInstructions">Print Instructions</label>
+                                <textarea class="form-control" id="printInstructions" rows="3" placeholder="Enter print instructions"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Pay and Print</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Card -->
+            <div class="col-md-4">
+                <div class="card glass-bg">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">Actions</h2>
+                        <button id="userInfoBtn" class="btn btn-primary btn-block mb-3">User Info</button>
+                        <a href="stationary.html" class="btn btn-primary btn-block">Stationary</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-1">
+        <div class="container">
+            <p class="mb-0">© 2024 Printeazy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Check if dark mode is enabled in localStorage
+    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (isDarkMode) {
+        enableDarkMode();
+    }
+
+    // Toggle between dark mode and light mode
+    darkModeToggle.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+
+    // Enable dark mode
+    function enableDarkMode() {
+        body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.innerText = 'Light Mode';
+    }
+
+    // Disable dark mode
+    function disableDarkMode() {
+        body.classList.remove('dark-mode');
+        localStorage.removeItem('darkMode');
+        darkModeToggle.innerText = 'Dark Mode';
+    }
+
+    // Handle form submission
+    const printForm = document.getElementById('printForm');
+    printForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Fetch form data
+        const documentFile = document.getElementById('document').value;
+        const colorOption = document.getElementById('colorOption').value;
+        const copies = document.getElementById('copies').value;
+        const printInstructions = document.getElementById('printInstructions').value;
+
+        // Perform actions with form data (e.g., send to server)
+        // This is just for demonstration
+        console.log("Document:", documentFile);
+        console.log("Color Option:", colorOption);
+        console.log("Number of Copies:", copies);
+        console.log("Print Instructions:", printInstructions);
+        window.location.href = 'pay.html'; 
+    });
+</script>
+</body>
+</html>
