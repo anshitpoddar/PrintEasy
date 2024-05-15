@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Printeazy</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+   <style>
+    /* Custom styles */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        color: #007bff;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-primary:focus {
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+    }
+
+    .text-muted {
+        color: #6c757d;
+    }
+
+    body.dark-mode {
+        background-color: #343a40;
+        color: #fff;
+    }
+
+    .dark-mode header {
+        background-color: #343a40;
+    }
+
+    footer {
+        background-color: #007bff;
+        color: white;
+        text-align: center;
+        padding: 10px 0;
+        position: fixed;
+        bottom: 0;
+        left:0;
+        width: 100%;
+        box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.5);
+    }
+
+    header {
+        box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.5);
+    }
+
+   </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-2">
+        <div class="container">
+            <h1 class="display-4">Printeazy</h1>
+            <p class="lead"><i>"Hassle free print and stationery services for busy college people"</i></p>
+            <button id="darkModeToggle" class="btn btn-sm btn-outline-light">Dark Mode</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container my-4">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">Login</h2>
+                        <!-- Login Form -->
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </form>
+                        <!-- Forgot Password Link -->
+                        <div class="text-center mt-3">
+                            <a href="#" class="text-muted">Forgot password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-4">
+        <div class="container">
+            <p class="mb-0">© 2024 Printeazy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        // Check if dark mode is enabled in localStorage
+        const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+        if (isDarkMode) {
+            enableDarkMode();
+        }
+
+        // Toggle between dark mode and light mode
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                disableDarkMode();
+            } else {
+                enableDarkMode();
+            }
+        });
+
+        // Enable dark mode
+        function enableDarkMode() {
+            body.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'enabled');
+            darkModeToggle.innerText = 'Sky';
+        }
+
+        // Disable dark mode
+        function disableDarkMode() {
+            body.classList.remove('dark-mode');
+            localStorage.removeItem('darkMode');
+            darkModeToggle.innerText = 'Moon';
+        }
+
+        // Handle form submission
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Perform your login validation here
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // For demonstration, let's assume credentials are correct
+            const credentialsAreCorrect = true;
+
+            if (credentialsAreCorrect) {
+                // Redirect the user to the print page
+                window.location.href = 'print_page.html'; // Change 'print_page.html' to the actual URL of your print page
+            } else {
+                // Handle incorrect credentials (e.g., display an error message)
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

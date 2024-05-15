@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printeazy</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .header-box {
+        
+            margin-bottom: 2rem;
+            margin-top:90px;
+        }
+
+        .header {
+            font-size: 3rem;
+            font-family: 'Courier New', Courier, monospace;
+            color: #000000;
+            margin: 0;
+        }
+
+        .btn-custom {
+            width: 200px;
+            margin: 10px 0;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary-custom {
+            background-color: #007bff;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary-custom {
+            background-color: #6c757d;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-info-custom {
+            background-color: #28a745;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left:0;
+            width: 100%;
+        }
+
+        header {
+            background-color: #007bff;
+            color: white;
+            text-align:center;
+            padding: 10px 0;
+            position: fixed;
+            left:0;
+            width: 100%;
+        }
+        /* Dark mode styles */
+body.dark-mode {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.dark-mode header {
+    background-color: #343a40;
+}
+
+
+        
+    </style>
+</head>
+
+<body>
+    <header>
+        <p class="lead"><i>"Hassle free print and stationery services for busy college people"</i></p>
+        <button id="darkModeToggle" class="btn btn-sm btn-outline-light">Dark Mode</button>
+    </header>
+    <div class="container text-center">
+        <div class="header-box">
+            <div class="header"><b>PrintEazy</b></div>
+        </div>
+        <a href="login.html" class="btn btn-custom btn-primary-custom text-white">Login</a>
+        <a href="register.html" class="btn btn-custom btn-secondary-custom text-white">Register</a>
+        <a href="contact.html" class="btn btn-custom btn-info-custom text-white">Contact</a>
+    </div>
+
+    <div class="footer">
+        © 2024 Printeazy. All rights reserved.
+    </div>
+
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+<!-- JavaScript for dark mode/light mode toggle -->
+<script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Check if dark mode is enabled in localStorage
+    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (isDarkMode) {
+        enableDarkMode();
+    }
+
+    // Toggle between dark mode and light mode
+    darkModeToggle.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+
+    // Enable dark mode
+    function enableDarkMode() {
+        body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.innerText = 'Sky';
+    }
+
+    // Disable dark mode
+    function disableDarkMode() {
+        body.classList.remove('dark-mode');
+        localStorage.removeItem('darkMode');
+        darkModeToggle.innerText = 'Moon';
+    }
+</script>
+
+
+</html>
