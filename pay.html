@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Printeazy</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        /* Custom styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-title {
+            color: #007bff;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+
+        .text-muted {
+            color: #6c757d;
+        }
+
+        body.dark-mode {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .dark-mode header {
+            background-color: #343a40;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.5);
+        }
+
+        header {
+            box-shadow: 0 0 0 0.5rem rgba(0, 123, 255, 0.5);
+        }
+
+    </style>
+</head>
+<body>
+<!-- Header -->
+<header class="bg-primary text-white text-center py-1">
+    <div class="container">
+        <h1 class="display-4">Printeazy</h1>
+        <p class="lead"><i>"Hassle free print and stationery services for busy college people"</i></p>
+        <button id="darkModeToggle" class="btn btn-sm btn-outline-light">Dark Mode</button>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container my-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-2">Checkout</h2>
+                    <!-- Payment Form -->
+                    <form id="paymentForm" class="w-48">
+                        <div class="form-group">
+                            <label for="cardNumber">Card Number</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="Enter your card number" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cvv">CVV</label>
+                                <input type="text" class="form-control" id="cvv" placeholder="CVV" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="nameOnCard">Name on Card</label>
+                            <input type="text" class="form-control" id="nameOnCard" placeholder="Enter the name on your card" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Pay Now</button>
+                    </form>
+                    <form id="upiPaymentForm" class="w-48 ml-4">
+                        <h5 class="mt-4 mb-3">UPI Payment</h5>
+                        <div class="form-group">
+                            <label for="upiOptions">Choose UPI App</label>
+                            <select class="form-control" id="upiOptions" required>
+                                <option value="" selected disabled>Select UPI App</option>
+                                <option value="googlepay">Google Pay</option>
+                                <option value="phonepe">PhonePe</option>
+                                <option value="paytm">Paytm</option>
+                                <!-- Add more UPI apps if needed -->
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-block" onclick="processUPI()">Proceed to UPI Payment</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center py-2">
+    <div class="container">
+        <p class="mb-0">© 2024 Printeazy. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    // Check if dark mode is enabled in localStorage
+    const isDarkMode = localStorage.getItem('darkMode') === 'enabled';
+    if (isDarkMode) {
+        enableDarkMode();
+    }
+
+    // Toggle between dark mode and light mode
+    darkModeToggle.addEventListener('click', () => {
+        if (body.classList.contains('dark-mode')) {
+            disableDarkMode();
+        } else {
+            enableDarkMode();
+        }
+    });
+
+    // Enable dark mode
+    function enableDarkMode() {
+        body.classList.add('dark-mode');
+        localStorage.setItem('darkMode', 'enabled');
+        darkModeToggle.innerText = 'Sky';
+    }
+
+    // Disable dark mode
+    function disableDarkMode() {
+        body.classList.remove('dark-mode');
+        localStorage.removeItem('darkMode');
+        darkModeToggle.innerText = 'Moon';
+    }
+
+    // Handle form submission
+    const paymentForm = document.getElementById('paymentForm');
+    paymentForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Perform your payment processing here
+        const cardNumber = document.getElementById('cardNumber').value;
+        const expiryDate = document.getElementById('expiryDate').value;
+        const cvv = document.getElementById('cvv').value;
+        const nameOnCard = document.getElementById('nameOnCard').value;
+
+        // For demonstration, let's assume payment is successful
+        const paymentIsSuccessful = true;
+
+        if (paymentIsSuccessful) {
+            // Redirect the user to the success page
+            window.location.href = 'success.html'; // Change 'success.html' to the actual URL of your success page
+        } else {
+            // Handle payment failure (e.g., display an error message)
+            alert('Payment failed. Please try again.');
+        }
+    });
+</script>
+</body>
+</html>
